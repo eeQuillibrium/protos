@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "nikita.auth1";
+
+service Auth {
+    rpc Register (RegRequest) returns (RegResponse) {}
+    rpc Login (LoginRequest) returns (LoginResponse) {}
+    rpc isAdmin (IsAdminRequest) returns (IsAdminResponse) {}
+}
+
+message RegRequest {
+    string login = 1;
+    string pass = 2;
+}
+message RegResponse {
+    int64 user_id = 1;
+}
+
+message LoginRequest {
+    string login = 1;
+    string pass = 2;
+    int32 app_id = 3;
+}
+message LoginResponse {
+    string token = 1;
+}
+
+message IsAdminRequest {
+    int64 user_id = 1;
+}
+message IsAdminResponse {
+    bool is_admin = 1;
+}
