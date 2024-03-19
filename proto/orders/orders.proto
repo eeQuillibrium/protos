@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package orders;
+
+option go_package = "grpc.orders";
+
+service Ordering {
+  rpc SendOrder(SendOrderReq) returns (EmptyOrderResp);
+}
+message SendOrderReq {
+  int64 orderid = 1;
+  int64 userid = 3;
+  int64 price = 4;
+  message PieceUnitnum {
+    int64 piece = 1;
+    int64 unitnum = 2;
+  }
+  repeated PieceUnitnum units = 2;
+  enum OrderState {
+    ORDERED = 0;
+    COOK = 1;
+    DELIVER = 2;
+    DELIVERED = 3;
+  }
+  OrderState state = 5;
+}
+message EmptyOrderResp {
+  
+}
